@@ -535,10 +535,11 @@
 .el-table {
 	table {
 		th,
-		th .el-table__cell {
+		th.el-table__cell {
 			background-color: #ebeef5;
 			padding: 3px 0;
 			font-size: 14px;
+			height: 41px;
 		}
 
 		.cell {
