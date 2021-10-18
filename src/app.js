@@ -1,4 +1,5 @@
-import { deepMerge, isFunction } from "@/utils";
+import { deepMerge, isArray, isFunction, isString } from "@/utils";
+import storage from 'store'
 import { __inst } from "@/store";
 
 export const bootstrap = (that) => {
@@ -27,7 +28,6 @@ export const bootstrap = (that) => {
 
 	ctx.service = (d) => {
 		that.service = d;
-
 		if (fn.permission) {
 			that.permission = fn.permission(that);
 		}
@@ -35,13 +35,18 @@ export const bootstrap = (that) => {
 		return ctx;
 	};
 
-	ctx.permission = (x) => {
+	ctx.permission = (x,perms) => {
+		console.log('获取一次')
+		if(!perms && storage.get('permission')){
+			perms = storage.get('permission')
+		}
 		if (isFunction(x)) {
 			that.permission = x(that);
+		}else if(isString(x) && isArray(perms) && perms.length>0){
+			deepMerge(that.permission,{add:perms.includes(`${x}@create`),update:perms.includes(`${x}@update`),delete:perms.includes(`${x}@delete`)})
 		} else {
 			deepMerge(that.permission, x);
 		}
-
 		return ctx;
 	};
 

@@ -9,7 +9,7 @@ const webpackConfig = {
 	entry: "./src/index.js",
 	output: {
 		path: resolve("./dist"),
-		filename: "cl-admin-crud.min.js",
+		filename: "index.js",
 		libraryTarget: "umd"
 	},
 	module: {
