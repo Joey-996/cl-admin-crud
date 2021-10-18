@@ -36,7 +36,6 @@ export const bootstrap = (that) => {
 	};
 
 	ctx.permission = (x,perms) => {
-		console.log('获取一次')
 		if(!perms && storage.get('permission')){
 			perms = storage.get('permission')
 		}
